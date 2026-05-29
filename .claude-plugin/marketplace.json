@@ -1,0 +1,16 @@
+{
+  "name": "san-marketplace",
+  "owner": {
+    "name": "sanhuang"
+  },
+  "plugins": [
+    {
+      "name": "san-workflow",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/oicjacky/san-workflow.git"
+      },
+      "description": "Development workflow: docs-management, ticket-loop, tdd-workflow skills + 8 custom subagents + global rules."
+    }
+  ]
+}
