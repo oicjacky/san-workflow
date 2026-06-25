@@ -7,6 +7,8 @@ description: 開發文件管理系統 — feature docs、issue reports、tickets
 
 管理 `docs/` 下的開發紀錄文件。`docs/` 供人類與 Claude Code 共用；`skills/*/docs/` 是 Claude 內部技術參考，兩者不混用。
 
+> **專案可覆寫（本 skill 為 baseline 預設）**：各 repo 的實際追蹤集合以該 repo `docs/docs-as-code.md` 為準（若有）。常見覆寫：`TKT-*` 降級為**本地 scratch、不版控**；新增 `ANALYSIS.md` / `DESIGN.md`（ADR 風格）為**選用** feature 文件。
+
 ## When to Activate
 
 - Commit type 為 `feat:`、`fix:` 或 `refactor:` 且符合「When to Write Feature Docs」條件
@@ -38,13 +40,14 @@ docs/
 | Changelog | `<YYYY-MM>.md` | `2026-04.md` |
 
 - Feature slug 與 git branch name 對齊；一旦建立不改名
+- Feature doc 以該 feature **第一個 commit** 的 sha 前 6 碼命名（穩定、可提早建檔；檔名只是 handle，內容 as-built 涵蓋整個 MR 的所有 commit）
 - Ticket 序號在 feature 目錄內遞增（不同 feature 可重複序號，以目錄區分）
 - 不屬於特定 feature 的 issue / ticket 放入 `docs/feat/_general/`
 - Issue slug 最多 5 個單字
 
 ## YAML Frontmatter（必要）
 
-每個文件開頭必須有 frontmatter，從本 skill 目錄下的 `templates/`（與 SKILL.md 同層）複製對應 template 填入。下方各步驟所寫的 `templates/xxx.md` 皆指此目錄；user-level 安裝在 `~/.claude/skills/docs-management/templates/`，plugin 安裝則在 plugin cache 內對應目錄，請以實際 skill 目錄的絕對路徑為基準。
+每個文件開頭必須有 frontmatter，從 `${CLAUDE_SKILL_DIR}/templates/` 複製對應 template 填入。
 必填欄位以各 type 的 template 定義為準。
 
 注意事項：
@@ -86,7 +89,7 @@ docs/
 
 ### 建立 Feature Doc
 
-1. 複製 `templates/feature.md` 到 `docs/feat/<slug>/`
+1. 複製 `${CLAUDE_SKILL_DIR}/templates/feature.md` 到 `docs/feat/<slug>/`
 2. 以 commit hash 前 6 碼命名
 3. 填入 frontmatter（commit 欄位用完整 40 字元 hash）
 4. 撰寫 Overview、Changes Summary、Architecture Decisions
@@ -94,7 +97,7 @@ docs/
 
 ### 建立 Issue
 
-1. 複製 `templates/issue.md` 到相關 feature 資料夾
+1. 複製 `${CLAUDE_SKILL_DIR}/templates/issue.md` 到相關 feature 資料夾
 2. 命名為 `ISS-<YYYYMMDD>-<slug>.md`
 3. 填入 severity、Root Cause、Fix
 4. 修復後更新 `status: fixed` 與 `fixed-by`
@@ -102,16 +105,16 @@ docs/
 ### 建立 Ticket
 
 1. `find docs/ -name "TKT-*.md"` 找到目前最大序號
-2. 複製 `templates/ticket.md`，序號 +1
+2. 複製 `${CLAUDE_SKILL_DIR}/templates/ticket.md`，序號 +1
 3. 放入相關 feature 資料夾
 
 ### 建立 Handoff
 
-1. 複製 `templates/handoff.md` 到 `docs/handoff/`
+1. 複製 `${CLAUDE_SKILL_DIR}/templates/handoff.md` 到 `docs/handoff/`
 2. 重點填寫：Current State、What's Left、Context for Next Session
 3. 確保下一個 session 能獨立理解狀態
 
 ### 更新 Changelog
 
-1. 確認 `docs/changelog/<YYYY-MM>.md` 存在，不存在則從 `templates/changelog-entry.md` 建立
+1. 確認 `docs/changelog/<YYYY-MM>.md` 存在，不存在則從 `${CLAUDE_SKILL_DIR}/templates/changelog-entry.md` 建立
 2. Feature complete 或 Issue fixed 時新增對應條目

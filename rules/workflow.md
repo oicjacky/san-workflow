@@ -7,7 +7,7 @@ Research → Plan → TDD (Red/Green/Refactor) → Code Review → Commit (+ Fea
 Issue report、Ticket、Handoff note
 
 ## Docs
-遵循 `skills/docs-management/SKILL.md` 的完整規則。
+遵循 `skills/docs-management/SKILL.md`（baseline）。各 repo 的實際追蹤集合（尤其 `TKT-*` 是否版控）以該 repo `docs/docs-as-code.md` 為準。
 
 | Doc Type | 觸發時機 |
 |----------|---------|

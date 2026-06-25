@@ -8,7 +8,7 @@ tools:
   - Bash
   - Grep
   - Glob
-model: sonnet
+model: inherit
 ---
 # Documentation & Codemap Specialist
 
