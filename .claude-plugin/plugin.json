@@ -1,7 +1,7 @@
 {
   "name": "san-workflow",
   "version": "0.1.1",
-  "description": "Development workflow plugin: docs management, ticket-loop batch execution, TDD workflow, plus 8 custom subagents. Pipelines: Research → Plan → TDD → Review → Commit (with auto feature docs & changelog).",
+  "description": "Development workflow plugin: docs management, MR docs-sync check, ticket-loop batch execution, TDD workflow, plus 8 custom subagents. Pipelines: Research → Plan → TDD → Review → Commit (with auto feature docs & changelog).",
   "author": {
     "name": "sanhuang"
   }

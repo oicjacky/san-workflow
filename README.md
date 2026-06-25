@@ -2,7 +2,7 @@
 
 sanhuang 日常使用的 Claude Code 開發工作流，包成 plugin 方便團隊共用。
 
-包含 3 個 skills、8 個自訂 subagents、3 份全域 rules，覆蓋完整的「文件管理 → 待辦追蹤 → TDD → Code Review → Commit」管線。
+包含 4 個 skills、8 個自訂 subagents、3 份全域 rules，覆蓋完整的「文件管理 → 待辦追蹤 → TDD → Code Review → Commit」管線。
 
 ## 安裝
 
@@ -40,11 +40,12 @@ cp /tmp/san-workflow/rules/*.md ~/.claude/rules/
 
 ## 內容清單
 
-### Skills（3）
+### Skills（4）
 
 | Skill | 用途 |
 |-------|------|
 | `docs-management` | 開發文件管理：feature docs、issues、tickets、handoff、changelog |
+| `mr-docs-sync` | 發 MR / PR 前檢查本分支程式碼改動是否都已反映在版控文件與 changelog（只讀 + 回報落差）|
 | `ticket-loop` | 批次掃描並執行 `docs/` 下未完成 tickets（planner → agents → architect pipeline）|
 | `tdd-workflow` | Test-Driven Development 流程（Red/Green/Refactor + 80%+ coverage）|
 
@@ -101,6 +102,8 @@ san-workflow/
 │   ├── docs-management/
 │   │   ├── SKILL.md
 │   │   └── templates/        ← 5 個 doc templates
+│   ├── mr-docs-sync/
+│   │   └── SKILL.md
 │   ├── ticket-loop/
 │   │   └── SKILL.md
 │   └── tdd-workflow/
