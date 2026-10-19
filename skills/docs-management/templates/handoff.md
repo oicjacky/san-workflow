@@ -31,7 +31,7 @@ related:
 
 | File | Relevance |
 |------|-----------|
-| `<absolute-path>` | <為什麼重要> |
+| `<repo 相對路徑>` | <為什麼重要> |
 
 ## Context for Next Session
 

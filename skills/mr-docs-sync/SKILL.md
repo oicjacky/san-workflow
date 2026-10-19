@@ -1,6 +1,6 @@
 ---
 name: mr-docs-sync
-description: 發 MR / PR 前(或被要求「檢查文件是否同步」「docs-as-code 檢查」時),驗證本分支相對 base 的程式碼改動是否都已反映在該 feature 的版控文件(feature doc <sha>.md / DESIGN.md / ANALYSIS.md)與 changelog。回報落差並提出補寫建議。只讀+回報,不自動改文件,除非使用者要求。
+description: 發 MR / PR 前(或被要求「檢查文件是否同步」「docs-as-code 檢查」時),驗證本分支的程式碼改動是否已反映在該 feature 的版控文件與 changelog,回報落差並提出補寫建議。只讀+回報,不自動改文件。
 ---
 
 # MR Docs-Sync Check
@@ -21,8 +21,9 @@ description: 發 MR / PR 前(或被要求「檢查文件是否同步」「docs-a
 
 1. **定位 base 與 diff(只取已 commit,不含 working-tree)**
    - base 分支依 repo 而定(`origin/dev` / `origin/main` / `origin/master`);可由 `git rev-parse --abbrev-ref --symbolic-full-name @{u}` 或常見命名推定,不確定就問使用者。
-   - 程式碼改動:`git diff <base> HEAD --stat -- ':!docs/'`(兩點 diff = 本分支領先 base 的淨改動)。
-   - 文件改動:`git diff <base> HEAD --stat -- 'docs/'`。
+   - 程式碼改動:`git diff <base>...HEAD --stat -- ':!docs/'`(**三點 diff** = merge-base→HEAD,只含本分支自己引入的淨改動)。
+   - 文件改動:`git diff <base>...HEAD --stat -- 'docs/'`。
+   - **務必三點(`...`)而非兩點**:分支若**落後 base**(base 有你沒有的 commit),兩點 `git diff <base> HEAD` 會把「base 領先你」也算成你的改動 → 假性落差。三點以 merge-base 為基準,只反映本分支引入的改動。驗證可搭配 `git log <base>..HEAD --oneline -- <檔>`:某檔在兩點 diff 出現、卻無對應 commit,即為落後造成的假陽性 → 該檔非本 MR 改動。
 
 2. **找到 feature 文件夾**
    - 由分支名 → slug,對應 `docs/feat/<slug>/`。
