@@ -2,7 +2,7 @@
 name: grilling
 description: Grill the user relentlessly about a plan, decision, or idea. Use when the user wants to stress-test their thinking, or uses any 'grill' trigger phrases.
 origin: "mattpocock/skills — skills/productivity/grilling @ 1.2.3 (8b78b531), MIT © 2026 Matt Pocock"
-adapted: "每輪最多 4 題（超過依影響大小排到下一輪）；查事實改為依規模決定自己查或派 sub-agent（2026-10-09）；其餘與上游逐字一致"
+adapted: "每輪最多 4 題（超過依影響大小排到下一輪）；查事實改為依規模決定自己查或派 sub-agent（2026-10-09）；併入上游 85f83d3（同一輪的題目以水平線分隔）與 95249b0（題目措辭讓「yes」即採用建議答案）（2026-10-19）；其餘與上游逐字一致"
 ---
 
 # Grilling
@@ -11,13 +11,21 @@ Interview the user relentlessly until you reach a shared understanding. Map this
 
 Work the tree in **rounds**. The **frontier** is every decision whose prerequisites are already settled — the questions you can ask _now_ without guessing at answers you haven't heard yet. Ask the whole frontier in one round, at most 4 questions; when the frontier holds more, ask the 4 with the most impact and move the rest to the next round. Number each question and give your recommended answer. Then wait for the user's answers before the next round.
 
-Each question should be formatted like so:
+Format a round like so:
 
 ```
 ❓ **Q1** - **<question title>**: <question body, might be multiple paragraphs, including multiple choices>
 
 ➡️ <your recommended answer>
+
+---
+
+❓ **Q2** - **<question title>**: <question body, might be multiple paragraphs, including multiple choices>
+
+➡️ <your recommended answer>
 ```
+
+Word each question so "yes" accepts your recommended answer.
 
 Each round the user answers reshapes the tree — settled decisions push the frontier outward and unblock questions that depended on them. Recompute the frontier and ask the next round. A question whose answer depends on another question still open in this round belongs to a _later_ round, not this one.
 

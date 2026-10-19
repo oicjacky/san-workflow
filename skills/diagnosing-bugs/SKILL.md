@@ -2,7 +2,7 @@
 name: diagnosing-bugs
 description: "Diagnosis loop for hard bugs and performance regressions. Use when the user says \"diagnose\"/\"debug this\", or reports something broken/throwing/failing/slow."
 origin: "mattpocock/skills — skills/engineering/diagnosing-bugs @ 1.2.3 (8b78b531), MIT © 2026 Matt Pocock"
-adapted: "「定位」段、「影響範圍」段（2026-10-09 新增）、Phase 5、Phase 6 為在地改寫（接 docs-management／tdd-methodology 基質）；Phase 1–4 與 Redact 段與上游逐字一致"
+adapted: "「定位」段、「影響範圍」段（2026-10-09 新增）、Phase 5、Phase 6 為在地改寫（接 docs-management／tdd-methodology 基質）；Phase 5 併入上游 f3fc563（硬做出的紅燈先 diff 證明改動生效，2026-10-19）；Phase 1–4 與 Redact 段與上游逐字一致"
 ---
 
 # Diagnosing Bugs
@@ -146,6 +146,7 @@ Tool preference:
 > `tdd-methodology` 的「Red before green」要求先寫失敗測試；debug 情境要求更嚴——
 > 上游原文把 `Watch it fail` / `Watch it pass` 列為獨立步驟就是為此。套用 fix 之前先跑一次、
 > **親眼看到它紅**，確認它紅的原因是這個 bug（而非匯入錯誤、fixture 壞掉、斷言寫在別的行為上）。
+> 紅燈若是靠改程式碼或 fixture 硬做出來的，先跟原始版本 `diff`，證明改動真的生效，才信這個紅燈。
 > 沒看過紅的測試，變綠不能證明任何事。這與 Phase 1 的 red-capable 判準是同一條標準。
 
 

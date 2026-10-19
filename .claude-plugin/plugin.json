@@ -1,6 +1,6 @@
 {
   "name": "san-workflow",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Development workflow skills: docs management, MR docs-sync check, spec review, research, TDD methodology, bug diagnosis, codebase design, grilling, plus Python testing and quality gates. Pipeline: Research → Plan → TDD → Review → Commit.",
   "author": {
     "name": "oicjacky"
