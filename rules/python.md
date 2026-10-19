@@ -31,8 +31,11 @@ paths:
 - **Imports**: stdlib → third-party → local (ruff sorts); expose package API via `__all__`.
 
 ## Hooks
-- **建議**掛 PostToolUse ruff hook（advisory）：`ruff check` + `ruff format --diff` on `.py` edits — 只回報 findings、**never rewrites**。僅在有 ruff config 的專案生效（each project's own rules apply），其餘略過。
+- Recommended: a PostToolUse hook that runs an **advisory** `ruff check` + `ruff format --diff` on `.py` edits — it reports findings to the agent and **never rewrites**. Only act in projects with a ruff config (each project's own rules apply); skip the rest.
 
 ## Reference Skills
+- `python-testing` — fixtures, mocking, parametrization, async tests
+- `python-quality-gates` — test layout, coverage gate, CI wiring, pre-PR checklist
+- `tdd-methodology` — what makes a good test, seams, anti-patterns
 - `/security-review` — OWASP / secrets / dependency audit（內建 skill）
-- Language idioms 已 inline 於上方（§ Idioms）。
+- Language idioms are inline above (§ Idioms).

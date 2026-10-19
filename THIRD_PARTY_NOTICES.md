@@ -42,6 +42,7 @@ SOFTWARE.
 - 本 repo 中的衍生內容：
   - `skills/codebase-design`、`skills/diagnosing-bugs`、`skills/grilling`、`skills/research`、`skills/spec-review`、`skills/tdd-methodology`（各目錄另附 `LICENSE`）
   - `skills/docs-management` 的決策記錄門檻與領域詞彙表（`docs/CONTEXT.md`）段落（目錄另附 `LICENSE`）
+  - `rules/git-workflow.md` 的「Merge / Rebase 衝突處理」段
 
 ```
 MIT License
