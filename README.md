@@ -2,11 +2,11 @@
 
 一套 Claude Code 開發工作流，包成 plugin 方便團隊共用。
 
-包含 4 個 skills、8 個自訂 subagents、3 份全域 rules，覆蓋完整的「文件管理 → 待辦追蹤 → TDD → Code Review → Commit」管線。
+包含 10 個 skills 和 5 份全域 rules，覆蓋「研究 → 規劃 → TDD → 三軸 Code Review → Commit 與文件」整條管線。
 
 ## 安裝
 
-需要 Claude Code 支援 plugin 系統的版本（建議最新版）。
+需要支援 plugin 系統的 Claude Code（建議最新版）。
 
 ```text
 # 1. 在 Claude Code 中註冊 marketplace
@@ -16,79 +16,71 @@
 /plugin install san-workflow@san-marketplace
 ```
 
-> Plugin 與 marketplace 在同一個 repo 的 root，所以指令直接指向 repo 即可。
+`owner/repo` 的寫法會先試 SSH。沒有設定 GitHub SSH key 的機器，在 session 裡用 `/plugin` 安裝或更新時不會自動改走 HTTPS，請先在 shell 設 `CLAUDE_CODE_PLUGIN_PREFER_HTTPS=1` 再啟動 Claude Code。
 
-### 手動安裝 rules（必要）
+### 手動安裝 rules（建議）
 
-Plugin 機制目前不支援自動寫入 `~/.claude/rules/`。請手動：
+plugin 機制不能帶 rules，所以要手動複製。`~/.claude/rules/` 底下的 `.md`（含子目錄）會自動載入，不需要在 `CLAUDE.md` 加 `@import`。放在子目錄，就不會蓋掉你原本同名的 rules：
 
 ```bash
-git clone https://github.com/oicjacky/san-workflow.git /tmp/san-workflow
-mkdir -p ~/.claude/rules
-cp /tmp/san-workflow/rules/*.md ~/.claude/rules/
+tmp=$(mktemp -d) &&
+  git clone --depth 1 https://github.com/oicjacky/san-workflow.git "$tmp" &&
+  mkdir -p ~/.claude/rules/san-workflow &&
+  cp "$tmp"/rules/*.md ~/.claude/rules/san-workflow/ &&
+  rm -rf "$tmp"
 ```
 
-然後在 `~/.claude/CLAUDE.md` 加入：
-
-```markdown
-@rules/workflow.md
-@rules/git-workflow.md
-@rules/python.md
-```
-
-沒有這一步，`docs-management` 的觸發時機（pipeline、commit-type 對應 doc）會失效。
+這些 rules 有明確立場（例如 commit 前先等使用者審查、未經授權不 push），安裝前請先讀過，不需要的段落直接刪掉。沒有裝 `workflow.md` 的話，skills 仍可手動叫起，但 `docs-management` 等 skill 的觸發時機（哪種 commit 要寫哪種文件）會失效。
 
 ## 內容清單
 
-### Skills（4）
+### Skills（10）
+
+安裝後的名稱帶前綴，例如 `/san-workflow:spec-review`。
 
 | Skill | 用途 |
 |-------|------|
-| `docs-management` | 開發文件管理：feature docs、issues、tickets、handoff、changelog |
-| `mr-docs-sync` | 發 MR / PR 前檢查本分支程式碼改動是否都已反映在版控文件與 changelog（只讀 + 回報落差）|
-| `ticket-loop` | 批次掃描並執行 `docs/` 下未完成 tickets（planner → agents → architect pipeline）|
-| `tdd-workflow` | Test-Driven Development 流程（Red/Green/Refactor + 80%+ coverage）|
+| `docs-management` | 開發追蹤文件的建立與維護：feature doc、issue、ticket、handoff、changelog、research 報告、`docs/CONTEXT.md` |
+| `mr-docs-sync` | 發 MR／PR 前，檢查本分支的程式碼改動是否都已反映在文件與 changelog（只讀、回報落差） |
+| `spec-review` | Review 的 Spec 軸：比對程式碼改動與規格文件，找出漏做、超做、做錯 |
+| `research` | 依一手來源調查問題，結果寫成 repo 裡的 research 報告 |
+| `tdd-methodology` | 什麼算好的測試、seam 怎麼切、常見反模式 |
+| `diagnosing-bugs` | 難解 bug 與效能退化的診斷流程：先建紅燈迴路，再重現、排序假說、儀器化，最後收斂回 TDD |
+| `codebase-design` | 設計「深模組」的共用詞彙：介面怎麼設計、哪裡可以做深、seam 放在哪 |
+| `grilling` | 針對計畫或決策逐題追問，壓力測試想法 |
+| `python-testing` | pytest 的 fixtures、mocking、參數化、async 測試 |
+| `python-quality-gates` | Python 測試目錄結構、80% 覆蓋率閘門、CI 串接、發 PR 前的檢查清單 |
 
-### Custom Subagents（8）
+### Rules（5，手動安裝）
 
-| Agent | 任務 |
-|-------|------|
-| `architect` | 系統架構審查、技術決策 |
-| `code-reviewer` | Code quality / 維護性審查 |
-| `doc-updater` | 文件與 codemap 更新 |
-| `e2e-runner` | E2E 測試生成與執行 |
-| `planner` | 複雜功能的執行計畫 |
-| `refactor-cleaner` | 死碼移除、重構整理 |
-| `security-reviewer` | OWASP / 漏洞檢測 |
-| `tdd-guide` | TDD 流程引導 |
-
-`ticket-loop` 會根據 ticket 內容自動選擇對應 agent。
-
-### Global Rules（3，手動安裝）
-
-| File | 內容 |
+| 檔案 | 內容 |
 |------|------|
-| `workflow.md` | Pipeline：Research → Plan → TDD → Review → Commit |
-| `git-workflow.md` | Commit message 格式（type: description）與 PR workflow |
-| `python.md` | Python 專案特定規範 |
+| `workflow.md` | 開發管線、Bug 前置分支、三軸 Code Review、先規劃後動工、Verify Before Assert |
+| `git-workflow.md` | Commit 格式與拆分、Review Before Commit、分支與 MR、衝突處理、授權邊界 |
+| `docs-and-comments.md` | 註解、commit message、MR 描述的寫法 |
+| `security.md` | 機密處理、受版控檔案不放個人與基礎設施資訊、客戶名稱不進版控 |
+| `python.md` | Python 環境、慣用寫法（讀寫 `.py`／`.pyi` 檔時才載入） |
 
 ## 工作流概覽
 
 ```
-Research → Plan → TDD (Red/Green/Refactor) → Code Review → Commit
-                                                            │
-                                                            ├── docs-management（自動建 feature doc / 更新 changelog）
-                                                            └── ticket-loop（後續批次清待辦）
+Research → Plan → TDD (Red/Green) → Code Review（含 Refactor）→ Commit
+  │                                  │                          │
+  research                           /code-review（內建）        docs-management
+  grilling                           /security-review（內建）    mr-docs-sync（發 MR 前）
+                                     spec-review
+Bug：diagnosing-bugs 找到根因 → 收斂回 TDD
 ```
 
-`docs/` 目錄結構（由 docs-management 規範）：
+`docs/` 目錄結構（由 `docs-management` 規範）：
 
 ```
 docs/
-├── feat/<slug>/        ← feature docs + issues + tickets
-├── feat/_general/      ← 不屬於特定 feature 的 issues/tickets
+├── feat/<slug>/        ← feature doc、issue、ticket、research 報告
+├── feat/_general/      ← 不屬於特定 feature 的 issue 和 ticket
 ├── handoff/            ← 跨 session 交接
-└── changelog/<YYYY-MM>.md
+├── changelog/<YYYY-MM>.md
+└── CONTEXT.md          ← 領域詞彙表（選用）
 ```
 
 ## Plugin 結構
@@ -97,46 +89,33 @@ docs/
 san-workflow/
 ├── .claude-plugin/
 │   ├── plugin.json           ← plugin manifest
-│   └── marketplace.json      ← marketplace 註冊
-├── skills/
-│   ├── docs-management/
-│   │   ├── SKILL.md
-│   │   └── templates/        ← 5 個 doc templates
-│   ├── mr-docs-sync/
-│   │   └── SKILL.md
-│   ├── ticket-loop/
-│   │   └── SKILL.md
-│   └── tdd-workflow/
-│       └── SKILL.md
-├── agents/                   ← 8 個 .md
-├── rules/                    ← 3 份全域 rules（手動安裝）
-├── README.md
-└── .gitignore
+│   └── marketplace.json      ← marketplace 註冊（source 指向 repo 根目錄）
+├── skills/                   ← 10 個 skills
+├── rules/                    ← 5 份全域 rules（手動安裝）
+├── CHANGELOG.md
+├── LICENSE
+├── THIRD_PARTY_NOTICES.md
+└── README.md
 ```
 
-## 使用範例
+## 更新
 
-安裝完成後，在任何專案中：
+在 shell 執行下列指令，或在 session 裡開 `/plugin`，從 Installed 分頁選 san-workflow → **Update now**：
 
-```text
-# 1. 啟動新功能（Claude 會引導 TDD 流程）
-你想做什麼新功能？
-
-# 2. 累積 tickets 後批次處理
-/san-workflow:ticket-loop
-
-# 3. Commit 時自動觸發 docs-management
-（根據 commit type 自動建立 feature doc 與更新 changelog）
+```bash
+claude plugin update san-workflow@san-marketplace
 ```
 
-> Plugin 安裝後，skill 會帶有 namespace：`/san-workflow:ticket-loop`、`/san-workflow:docs-management` 等。
+plugin 只在版號改變時更新。rules 不會跟著更新，要再跑一次上方「手動安裝 rules」的指令。
 
 ## 疑難排解
 
-- **Skill 沒自動觸發**：確認 `~/.claude/rules/` 已放入 rules 且 CLAUDE.md 有 @import
-- **`ticket-loop` 找不到 ticket**：先用 `docs-management` 建立至少一個符合命名格式的 `TKT-NNN-<slug>.md`
-- **Agent 找不到**：確認 plugin 安裝成功（`/plugin list`），agents 應自動可用
-- **更新 plugin**：`/plugin update san-workflow`
+- **skill 沒有自動觸發**：確認 rules 已複製到 `~/.claude/rules/` 底下。
+- **同名 skill 出現兩份**：如果你同時啟用了 mattpocock 的 skills plugin，或在 `~/.claude/skills/` 有同名的個人 skill，兩份都會載入、各自佔用 context。建議只留一份。
+- **從 0.1.x 升級**：0.2.0 移除了 8 個 subagents、`ticket-loop` 和 `tdd-workflow`，細節見 [CHANGELOG.md](CHANGELOG.md)。rules 也要搬家：
+  1. 刪掉 0.1.x 複製到 `~/.claude/rules/` 頂層的 `workflow.md`、`git-workflow.md`、`python.md`（自己改過的話先備份）。
+  2. 刪掉 `~/.claude/CLAUDE.md` 裡的 `@rules/workflow.md`、`@rules/git-workflow.md`、`@rules/python.md` 三行。
+  3. 依上方「手動安裝 rules」重新安裝到 `~/.claude/rules/san-workflow/`。
 
 ## 授權
 
