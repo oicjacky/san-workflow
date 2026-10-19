@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.2.1
+
+### 修正與更新
+
+從 mattpocock/skills 併入 3 處上游改動，各檔 frontmatter 的 `adapted` 欄位記有對應的上游 commit：
+
+- `grilling`：同一輪的題目之間以 `---` 分隔；題目的措辭要讓使用者回「yes」就等於採用建議答案。
+- `tdd-methodology`：確認要測的 seam 時，每個候選 seam 附一行說明，寫它抓得到和抓不到什麼。
+- `diagnosing-bugs`：紅燈若是靠改程式碼或 fixture 硬做出來的，先跟原始版本 `diff`，證明改動真的生效。
+
 ## 0.2.0
 
 ### 不相容的改動

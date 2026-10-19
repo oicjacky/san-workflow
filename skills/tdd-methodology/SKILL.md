@@ -2,7 +2,7 @@
 name: tdd-methodology
 description: "Test-driven development methodology: what makes a test worth keeping, where the seam is, the red→green loop rules, test anti-patterns, and when to mock. Use when building features or fixing bugs test-first, or when a test's design (not its syntax) is in question. Python mechanics see `python-testing`; layout/coverage/CI gates see `python-quality-gates`."
 origin: "mattpocock/skills — skills/engineering/tdd @ 1.2.0 (ed37663c), MIT © 2026 Matt Pocock"
-adapted: "「分層」段、開頭路徑（CONTEXT.md→docs/CONTEXT.md、ADRs→DESIGN.md 拍板記錄）、§Seams 指向 codebase-design 的註記為在地改寫；其餘與上游逐字一致"
+adapted: "「分層」段、開頭路徑（CONTEXT.md→docs/CONTEXT.md、ADRs→DESIGN.md 拍板記錄）、§Seams 指向 codebase-design 的註記為在地改寫；§Seams 併入上游 3f59913（每個候選 seam 附一行說明抓得到與抓不到什麼，2026-10-19）；其餘與上游逐字一致"
 ---
 
 # Test-Driven Development
@@ -38,7 +38,7 @@ A **seam** is the public boundary you test at: the interface where you observe b
 
 **Test only at pre-agreed seams.** Before writing any test, write down the seams under test and confirm them with the user. No test is written at an unconfirmed seam. You can't test everything — agreeing the seams up front is how testing effort lands on the critical paths and complex logic instead of every edge case.
 
-Ask: "What's the public interface, and which seams should we test?"
+Ask: "What's the public interface, and which seams should we test?" Give each proposed seam a one-line note on what it catches and what it misses.
 
 ## Anti-patterns
 
