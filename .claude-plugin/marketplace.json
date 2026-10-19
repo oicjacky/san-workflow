@@ -1,16 +1,14 @@
 {
   "name": "san-marketplace",
+  "description": "Marketplace for the san-workflow development workflow plugin.",
   "owner": {
     "name": "oicjacky"
   },
   "plugins": [
     {
       "name": "san-workflow",
-      "source": {
-        "source": "url",
-        "url": "https://github.com/oicjacky/san-workflow.git"
-      },
-      "description": "Development workflow: docs-management, mr-docs-sync, ticket-loop, tdd-workflow skills + 8 custom subagents + global rules."
+      "source": "./",
+      "description": "Development workflow skills: docs management, MR docs-sync check, spec review, research, TDD methodology, bug diagnosis, codebase design, grilling, plus Python testing and quality gates."
     }
   ]
 }
