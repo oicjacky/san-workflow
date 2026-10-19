@@ -33,7 +33,6 @@ paths:
 ## Hooks
 - **建議**掛 PostToolUse ruff hook（advisory）：`ruff check` + `ruff format --diff` on `.py` edits — 只回報 findings、**never rewrites**。僅在有 ruff config 的專案生效（each project's own rules apply），其餘略過。
 
-## Reference Skills / Agents
-- `agents/security-reviewer` — OWASP / secrets / dependency audit (delegate via Task)
-- `skills/tdd-workflow` — TDD 流程、fixtures、coverage 要求
+## Reference Skills
+- `/security-review` — OWASP / secrets / dependency audit（內建 skill）
 - Language idioms 已 inline 於上方（§ Idioms）。

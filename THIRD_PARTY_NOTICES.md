@@ -7,8 +7,8 @@
 - 來源：https://github.com/affaan-m/everything-claude-code （v1.8.0）
 - 授權：MIT，Copyright (c) 2026 Affaan Mustafa
 - 本 repo 中的衍生內容：
-  - `agents/` 的 8 個 subagents、`skills/tdd-workflow`
   - `rules/workflow.md`、`rules/git-workflow.md`、`rules/python.md` 的部分段落
+  - 0.1.x 版的 `agents/` 與 `skills/tdd-workflow`（0.2.0 已移除，仍留在 git 歷史中）
 
 ```
 MIT License
