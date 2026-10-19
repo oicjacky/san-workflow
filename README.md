@@ -1,6 +1,6 @@
 # san-workflow
 
-sanhuang 日常使用的 Claude Code 開發工作流，包成 plugin 方便團隊共用。
+一套 Claude Code 開發工作流，包成 plugin 方便團隊共用。
 
 包含 4 個 skills、8 個自訂 subagents、3 份全域 rules，覆蓋完整的「文件管理 → 待辦追蹤 → TDD → Code Review → Commit」管線。
 
@@ -140,4 +140,4 @@ san-workflow/
 
 ## 授權
 
-依 sanhuang 個人開發習慣整理，僅供團隊內部參考使用。
+MIT，見 [LICENSE](LICENSE)。部分內容改寫自其他 MIT 授權的專案，版權聲明見 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。
