@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.2
+
+### 修正與更新
+
+- `workflow.md`：範圍清楚的簡單實作派給 subagent 時改用 `model: opus`（原為 `sonnet`），effort 維持 `medium`／`high` 分級；兩段收斂範圍指示保留原文並改正出處。
+
 ## 0.2.1
 
 ### 修正與更新
