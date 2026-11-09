@@ -2,12 +2,12 @@
 name: research
 description: Investigate a question against high-trust primary sources and capture the findings as a Markdown file in the repo. Use when the user wants a topic researched, docs or API facts gathered, or reading legwork delegated to a background agent.
 origin: "mattpocock/skills — skills/engineering/research @ 1.2.3 (8b78b531), MIT © 2026 Matt Pocock"
-adapted: "「落檔」段改寫為一律委派 docs-management（上游原文允許 match existing convention）；開頭改為依調查規模決定是否開 background agent（2026-10-09）；第 1、2 點與上游逐字一致"
+adapted: "「落檔」段改寫為一律委派 docs-management（上游原文允許 match existing convention）；開頭改為依調查規模決定是否開 background agent（2026-10-09）；background agent 用全新 context 開始，併入上游 7739eae（2026-11-09）；第 1、2 點與上游逐字一致"
 ---
 
 # Research
 
-When the research needs more than a handful of lookups (several sources, long docs), spin up a **background agent** so you keep working while it reads; for a single fact or one page, look it up directly.
+When the research needs more than a handful of lookups (several sources, long docs), spin up a **background agent** so you keep working while it reads, and start it with a fresh context window; for a single fact or one page, look it up directly.
 
 Its job:
 

@@ -2,7 +2,7 @@
 name: grilling
 description: Grill the user relentlessly about a plan, decision, or idea. Use when the user wants to stress-test their thinking, or uses any 'grill' trigger phrases.
 origin: "mattpocock/skills — skills/productivity/grilling @ 1.2.3 (8b78b531), MIT © 2026 Matt Pocock"
-adapted: "每輪最多 4 題（超過依影響大小排到下一輪）；查事實改為依規模決定自己查或派 sub-agent（2026-10-09）；併入上游 85f83d3（同一輪的題目以水平線分隔）與 95249b0（題目措辭讓「yes」即採用建議答案）（2026-10-19）；其餘與上游逐字一致"
+adapted: "每輪最多 4 題（超過依影響大小排到下一輪）；查事實改為依規模決定自己查或派 sub-agent（2026-10-09）；併入上游 85f83d3（同一輪的題目以水平線分隔）與 95249b0（題目措辭讓「yes」即採用建議答案）（2026-10-19）；派 sub-agent 查事實時用全新 context，併入上游 7739eae（2026-11-09）；其餘與上游逐字一致"
 ---
 
 # Grilling
@@ -29,6 +29,6 @@ Word each question so "yes" accepts your recommended answer.
 
 Each round the user answers reshapes the tree — settled decisions push the frontier outward and unblock questions that depended on them. Recompute the frontier and ask the next round. A question whose answer depends on another question still open in this round belongs to a _later_ round, not this one.
 
-Finding _facts_ is your job, never the user's. When a frontier question needs a fact from the environment (filesystem, tools, etc.), look it up yourself — directly when it takes a few reads or one search, through a sub-agent when it needs a wide search — don't ask the user for anything you could look up yourself. Don't block on it: a running exploration is an unsettled prerequisite, so only the questions downstream of it wait for the sub-agent to report — ask the rest of the frontier now. The _decisions_ are the user's — put each to them and wait.
+Finding _facts_ is your job, never the user's. When a frontier question needs a fact from the environment (filesystem, tools, etc.), look it up yourself — directly when it takes a few reads or one search, through a sub-agent with a fresh context window when it needs a wide search — don't ask the user for anything you could look up yourself. Don't block on it: a running exploration is an unsettled prerequisite, so only the questions downstream of it wait for the sub-agent to report — ask the rest of the frontier now. The _decisions_ are the user's — put each to them and wait.
 
 The session is done when the frontier is empty: every branch of the design tree visited, nothing left silently assumed. Do not act on it until the user confirms you have reached a shared understanding.

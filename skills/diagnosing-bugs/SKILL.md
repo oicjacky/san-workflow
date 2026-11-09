@@ -2,7 +2,7 @@
 name: diagnosing-bugs
 description: "Diagnosis loop for hard bugs and performance regressions. Use when the user says \"diagnose\"/\"debug this\", or reports something broken/throwing/failing/slow."
 origin: "mattpocock/skills — skills/engineering/diagnosing-bugs @ 1.2.3 (8b78b531), MIT © 2026 Matt Pocock"
-adapted: "「定位」段、「影響範圍」段（2026-10-09 新增）、Phase 5、Phase 6 為在地改寫（接 docs-management／tdd-methodology 基質）；Phase 5 併入上游 f3fc563（硬做出的紅燈先 diff 證明改動生效，2026-10-19）；Phase 1–4 與 Redact 段與上游逐字一致"
+adapted: "「定位」段、「影響範圍」段（2026-10-09 新增）、Phase 5、Phase 6 為在地改寫（接 docs-management／tdd-methodology 基質）；Phase 5 併入上游 f3fc563（硬做出的紅燈先 diff 證明改動生效，2026-10-19）；不採用上游 d80fa0f 的 CONTEXT.md→GLOSSARY.md 改名，沿用 docs/CONTEXT.md（2026-11-09）；Phase 1–4 與 Redact 段與上游逐字一致"
 ---
 
 # Diagnosing Bugs
