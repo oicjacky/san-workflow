@@ -77,9 +77,9 @@ Issue report、Ticket、Handoff note、Research 報告
 
 ## 委派 subagent
 - 依規模決定：幾次工具呼叫就能查完的自己查；大範圍、可平行、彼此獨立的調查才派 subagent。
-- 調查與審查的 subagent 沿用主模型。範圍清楚的簡單實作派給 subagent 時，指定 `model: sonnet`、
-  `effort: medium`；子任務跨多個檔案或步驟多時改用 `high`；不用 `low`（容易略過驗證、做到一半就停下來問）。
-- 派實作 subagent 時，在 prompt 附上這兩段（Sonnet 5.5 官方提示指南原文）：
+- 調查與審查的 subagent 沿用主模型。範圍清楚的簡單實作派給 subagent 時，指定 `model: opus`、
+  `effort: medium`；子任務跨多個檔案或步驟多時改用 `high`。
+- 派實作 subagent 時，在 prompt 附上這兩段（出自 Sonnet 5.5 官方提示指南；Opus 5 指南也指出模型會擴大任務範圍）：
 
   > Keep working until everything the user asked for is done, and only stop to ask when you can't go on without the user or before a risky step.
   >

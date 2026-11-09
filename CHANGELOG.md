@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.2.2
+
+### 修正與更新
+
+- `workflow.md`：範圍清楚的簡單實作派給 subagent 時改用 `model: opus`（原為 `sonnet`），effort 維持 `medium`／`high` 分級；兩段收斂範圍指示保留原文並改正出處。
+- `grilling`、`research`、`codebase-design`：派 sub-agent 時用全新的 context window 開始，併入 mattpocock/skills 上游 7739eae。
+- `tdd-methodology`、`diagnosing-bugs`、`codebase-design`：`adapted` 欄位註明不採用上游 d80fa0f 的 CONTEXT.md→GLOSSARY.md 改名。
+
 ## 0.2.1
 
 ### 修正與更新

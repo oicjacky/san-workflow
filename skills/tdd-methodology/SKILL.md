@@ -2,7 +2,7 @@
 name: tdd-methodology
 description: "Test-driven development methodology: what makes a test worth keeping, where the seam is, the red→green loop rules, test anti-patterns, and when to mock. Use when building features or fixing bugs test-first, or when a test's design (not its syntax) is in question. Python mechanics see `python-testing`; layout/coverage/CI gates see `python-quality-gates`."
 origin: "mattpocock/skills — skills/engineering/tdd @ 1.2.0 (ed37663c), MIT © 2026 Matt Pocock"
-adapted: "「分層」段、開頭路徑（CONTEXT.md→docs/CONTEXT.md、ADRs→DESIGN.md 拍板記錄）、§Seams 指向 codebase-design 的註記為在地改寫；§Seams 併入上游 3f59913（每個候選 seam 附一行說明抓得到與抓不到什麼，2026-10-19）；其餘與上游逐字一致"
+adapted: "「分層」段、開頭路徑（CONTEXT.md→docs/CONTEXT.md、ADRs→DESIGN.md 拍板記錄）、§Seams 指向 codebase-design 的註記為在地改寫；§Seams 併入上游 3f59913（每個候選 seam 附一行說明抓得到與抓不到什麼，2026-10-19）；不採用上游 d80fa0f 的 CONTEXT.md→GLOSSARY.md 改名，沿用 docs/CONTEXT.md（2026-11-09）；其餘與上游逐字一致"
 ---
 
 # Test-Driven Development

@@ -2,7 +2,7 @@
 name: codebase-design
 description: Shared vocabulary for designing deep modules. Use when the user wants to design or improve a module's interface, find deepening opportunities, decide where a seam goes, make code more testable or AI-navigable, or when another skill needs the deep-module vocabulary.
 origin: "mattpocock/skills — skills/engineering/codebase-design @ 1.2.3 (8b78b531), MIT © 2026 Matt Pocock"
-adapted: "內文未改寫；附檔 DESIGN-IT-TWICE.md 的 CONTEXT.md 路徑改為 docs/CONTEXT.md，sub-agent 數改為 3 個（ports & adapters 適用時 4 個，2026-10-09）"
+adapted: "內文未改寫；附檔 DESIGN-IT-TWICE.md 的 CONTEXT.md 路徑改為 docs/CONTEXT.md，sub-agent 數改為 3 個（ports & adapters 適用時 4 個，2026-10-09）；DESIGN-IT-TWICE.md 的每個 sub-agent 用全新 context，併入上游 7739eae（2026-11-09）；不採用上游 d80fa0f 的 CONTEXT.md→GLOSSARY.md 改名，沿用 docs/CONTEXT.md（2026-11-09）"
 ---
 
 # Codebase Design

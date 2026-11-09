@@ -29,6 +29,8 @@ claude --plugin-dir .               # 實際載入這份 checkout，試用 skill
 
 同步只做單向：本機設定 → 本 repo。
 
+上游（例如 mattpocock/skills）的改動，先併入作者的本機設定，再依本節同步過來；不要直接改本 repo 的 skills。
+
 - **只複製檔案。** 不要 cherry-pick、subtree 或 format-patch 本機設定 repo 的 commit：那邊的 commit 用的是另一個身分，帶過來就會把它公開。
 - **skills 原樣複製**，只有一個例外：`python-testing` 拿掉指向 `python-backend` 和 `rules/testing.md` 的引用，因為這兩者沒有收進本 repo。
 - **rules 是公開版，手動改寫**，規則如下：
